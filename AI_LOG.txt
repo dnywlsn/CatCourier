@@ -1,0 +1,19 @@
+AI LOG - Cat Courier (Assignment 8-9)
+Student: Sagatova Aizhan, OR1-2
+AI tool: Claude (Anthropic)
+
+29.10.2026
+- Asked AI to explain the assignment and the lecture (Canvas Scaler, anchors, safe area, Git).
+- Asked for game ideas. Chose "Cat Courier" (cat delivers parcels on rooftops).
+- AI helped write the first GDD draft and the plan for weeks 9-13.
+
+04.11.2026
+- AI made the pixel art (cat frames, rooftops, city background, buttons, icons) and the pixel font.
+- AI wrote the scripts: SafeArea (from the lecture), MainMenu, PauseMenu, PlayerController,
+  CatAnimation, MobileButton, GameUI, PlayerHealth, Fish, CameraFollow, Parallax, LevelTitle, FinishDoor.
+- AI built the MainMenu and Level1 scenes (Canvas Scaler 1920x1080 match 1, anchors, SafeArea panel)
+  and tested them in Device Simulator (16:9, iPhone notch, tablet 4:3).
+- AI made the GDD PDF, README and this log.
+- I checked that Play, Pause, Resume, Restart and Menu work and that nothing is under the notch.
+
+Code from AI: most of the code. I will change and extend it myself in the next weeks.
