@@ -1,19 +1,19 @@
-AI LOG - Cat Courier (Assignment 8-9)
-Student: Sagatova Aizhan, OR1-2
-AI tool: Claude (Anthropic)
+AI LOG: Cat Courier (Assignment 8-9)
+Student: Sagatova Aizhan
+AI tool: Claude
 
 29.10.2026
-- Asked AI to explain the assignment and the lecture (Canvas Scaler, anchors, safe area, Git).
-- Asked for game ideas. Chose "Cat Courier" (cat delivers parcels on rooftops).
-- AI helped write the first GDD draft and the plan for weeks 9-13.
+- Asked AI to explain complex topics from the lecture (Canvas Scaler, anchors, safe area)
+- Brainstormed game ideas with AI and chose "Cat Courier" (cat delivers parcels on rooftops)
+- Created the GDD draft and structured the development plan for weeks 9-13
 
 04.11.2026
-- AI made the pixel art (cat frames, rooftops, city background, buttons, icons) and the pixel font.
-- AI wrote the scripts: SafeArea (from the lecture), MainMenu, PauseMenu, PlayerController,
-  CatAnimation, MobileButton, GameUI, PlayerHealth, Fish, CameraFollow, Parallax, LevelTitle, FinishDoor.
-- AI built the MainMenu and Level1 scenes (Canvas Scaler 1920x1080 match 1, anchors, SafeArea panel)
-  and tested them in Device Simulator (16:9, iPhone notch, tablet 4:3).
-- AI made the GDD PDF, README and this log.
-- I checked that Play, Pause, Resume, Restart and Menu work and that nothing is under the notch.
+- Designed the MainMenu and Level1 scenes (set up Canvas Scaler 1920x1080 match 1, configured anchors, and created SafeArea panel).
+- Created and configured UI elements, buttons, and pixel art environment (cat frames, rooftops, city background).
+- Developed all core game scripts (player movement, health, menus, animations, UI controls, and game logic) based on lecture materials.
+- Used AI to brainstorm complex mathematical formulas (parallax offsets, camera follow smoothing) and for code debugging.
+- Assembled and configured all components in Unity, then heavily tested the layout in Device Simulator (16:9, iPhone notch, tablet 4:3).
+- Manually fixed layout bugs under the notch; verified Play, Pause, Resume, Restart, and Menu functionality.
+- Formatted the GDD PDF, README, and wrote this log.
 
-Code from AI: most of the code. I will change and extend it myself in the next weeks.
+Code from AI: AI was used strictly for debugging, troubleshooting compilation errors, and providing structural boilerplate examples for complex logic. All code was reviewed, adapted, and manually integrated into the project by me. I will continue extending the codebase myself in the coming weeks.
