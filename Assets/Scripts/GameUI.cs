@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
     public Text fishText;
+    public Text triesText;
 
     int fish = 0;
 
@@ -25,5 +26,10 @@ public class GameUI : MonoBehaviour
     {
         fish++;
         fishText.text = fish.ToString();
+    }
+
+    public void ShowTries(int tries)
+    {
+        triesText.text = "TRY " + tries;
     }
 }

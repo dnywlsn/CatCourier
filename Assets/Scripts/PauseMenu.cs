@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
+        PlayerHealth.tries++; // restart counts as a new try
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

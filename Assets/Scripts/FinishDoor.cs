@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FinishDoor : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class FinishDoor : MonoBehaviour
         {
             done = true;
             deliveredText.SetActive(true);
+            deliveredText.GetComponent<Text>().text = "DELIVERED!\nTRIES: " + PlayerHealth.tries;
+            Debug.Log("Level done in tries: " + PlayerHealth.tries);
         }
     }
 }
