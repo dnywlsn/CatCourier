@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        PlayerHealth.tries = 1; // new game, count tries again
         SceneManager.LoadScene("Level1");
     }
 

@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
 
     public bool isGrounded;
     public float moveInput;
+    public Collider2D lastGround; // last roof the cat stood on
 
     Rigidbody2D rb;
     SpriteRenderer sr;
     bool jumpWasPressed;
+    float knockTimer = 0;
 
     void Start()
     {
@@ -46,7 +48,19 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // after a hit the cat flies back a little, no control
+        if (knockTimer > 0)
+        {
+            knockTimer -= Time.fixedDeltaTime;
+            return;
+        }
         rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
+    }
+
+    public void Knockback(Vector2 force)
+    {
+        rb.linearVelocity = force;
+        knockTimer = 0.25f;
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -54,7 +68,10 @@ public class PlayerController : MonoBehaviour
         foreach (ContactPoint2D contact in collision.contacts)
         {
             if (contact.normal.y > 0.5f)
+            {
                 isGrounded = true;
+                lastGround = collision.collider;
+            }
         }
     }
 
