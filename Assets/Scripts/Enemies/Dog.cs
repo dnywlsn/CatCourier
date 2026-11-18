@@ -6,23 +6,9 @@ public class Dog : MonoBehaviour
     enum State { Patrol, Chase, WindUp, Bite, Cooldown }
     State state = State.Patrol;
 
-    [Header("Moving")]
-    public float leftX = 0f;
+    public DogStats stats;      // numbers are in the data asset
+    public float leftX = 0f;    // roof limits come from LevelData
     public float rightX = 5f;
-    public float walkSpeed = 1.5f;
-    public float runSpeed = 3.5f;
-
-    [Header("Seeing")]
-    public float viewRange = 6f;
-    public float viewAngle = 60f;   // half angle in front of the dog
-    public float forgetTime = 1.5f; // how long it remembers the cat
-
-    [Header("Attack")]
-    public float attackRange = 1.8f;
-    public float windUpTime = 0.5f;
-    public float biteSpeed = 8f;
-    public float biteTime = 0.25f;
-    public float cooldown = 1.2f;
 
     [Header("Sprites")]
     public Sprite[] walkFrames;
@@ -51,7 +37,7 @@ public class Dog : MonoBehaviour
         switch (state)
         {
             case State.Patrol:
-                Walk(walkSpeed);
+                Walk(stats.walkSpeed);
                 // turn around at the edge of the roof
                 if (transform.position.x >= rightX) dir = -1;
                 if (transform.position.x <= leftX) dir = 1;
@@ -60,15 +46,15 @@ public class Dog : MonoBehaviour
 
             case State.Chase:
                 dir = player.position.x > transform.position.x ? 1 : -1;
-                Walk(runSpeed);
-                if (Time.time - lastSeenTime > forgetTime)
+                Walk(stats.runSpeed);
+                if (Time.time - lastSeenTime > stats.forgetTime)
                 {
                     state = State.Patrol;
                 }
-                else if (sees && dist < attackRange)
+                else if (sees && dist < stats.attackRange)
                 {
                     state = State.WindUp;
-                    timer = windUpTime;
+                    timer = stats.windUpTime;
                     alertIcon.SetActive(true);
                 }
                 break;
@@ -82,17 +68,17 @@ public class Dog : MonoBehaviour
                     sr.color = Color.white;
                     sr.sprite = attackSprite;
                     alertIcon.SetActive(false);
-                    timer = biteTime;
+                    timer = stats.biteTime;
                     state = State.Bite;
                 }
                 break;
 
             case State.Bite:
-                Move(biteSpeed);
+                Move(stats.biteSpeed);
                 timer -= Time.deltaTime;
                 if (timer <= 0)
                 {
-                    timer = cooldown;
+                    timer = stats.cooldown;
                     state = State.Cooldown;
                 }
                 break;
@@ -111,9 +97,9 @@ public class Dog : MonoBehaviour
         Vector2 toPlayer = (Vector2)player.position + Vector2.up * 0.5f - eyes;
 
         // 1. distance
-        if (toPlayer.magnitude > viewRange) return false;
+        if (toPlayer.magnitude > stats.viewRange) return false;
         // 2. angle (only in front of the dog)
-        if (Vector2.Angle(Vector2.right * dir, toPlayer) > viewAngle) return false;
+        if (Vector2.Angle(Vector2.right * dir, toPlayer) > stats.viewAngle) return false;
         // 3. line of sight, walls block it
         RaycastHit2D[] hits = Physics2D.RaycastAll(eyes, toPlayer.normalized, toPlayer.magnitude);
         foreach (RaycastHit2D hit in hits)

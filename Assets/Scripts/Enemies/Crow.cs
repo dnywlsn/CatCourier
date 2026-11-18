@@ -6,10 +6,7 @@ public class Crow : MonoBehaviour
     enum State { Idle, Aim, Throw, Cooldown }
     State state = State.Idle;
 
-    public float throwRange = 8f;
-    public float aimTime = 0.7f;
-    public float cooldown = 1.8f;
-    public float pebbleSpeed = 6f;
+    public CrowStats stats; // numbers are in the data asset
 
     public GameObject pebblePrefab;
     public Sprite idleSprite;
@@ -38,10 +35,10 @@ public class Crow : MonoBehaviour
         {
             case State.Idle:
                 sr.sprite = idleSprite;
-                if (dist < throwRange)
+                if (dist < stats.throwRange)
                 {
                     state = State.Aim;
-                    timer = aimTime;
+                    timer = stats.aimTime;
                     alertIcon.SetActive(true);
                     aimLine.enabled = true;
                 }
@@ -52,7 +49,7 @@ public class Crow : MonoBehaviour
                 timer -= Time.deltaTime;
                 aimLine.SetPosition(0, transform.position + Vector3.up * 0.4f);
                 aimLine.SetPosition(1, player.position + Vector3.up * 0.5f);
-                if (dist > throwRange)
+                if (dist > stats.throwRange)
                 {
                     StopAim();
                     state = State.Idle;
@@ -69,14 +66,14 @@ public class Crow : MonoBehaviour
                 Vector3 start = transform.position + Vector3.up * 0.4f;
                 Vector2 direction = (player.position + Vector3.up * 0.5f - start).normalized;
                 GameObject p = Instantiate(pebblePrefab, start, Quaternion.identity);
-                p.GetComponent<Pebble>().velocity = direction * pebbleSpeed;
-                timer = cooldown;
+                p.GetComponent<Pebble>().Throw(direction * stats.pebbleSpeed, stats.pebbleLifeTime);
+                timer = stats.cooldown;
                 state = State.Cooldown;
                 break;
 
             case State.Cooldown:
                 timer -= Time.deltaTime;
-                if (timer < cooldown - 0.3f) sr.sprite = idleSprite;
+                if (timer < stats.cooldown - 0.3f) sr.sprite = idleSprite;
                 if (timer <= 0) state = State.Idle;
                 break;
         }

@@ -6,17 +6,9 @@ public class Pigeon : MonoBehaviour
     enum State { Patrol, WindUp, Dive, Return }
     State state = State.Patrol;
 
-    [Header("Patrol")]
-    public float leftX = 0f;
+    public PigeonStats stats;   // numbers are in the data asset
+    public float leftX = 0f;    // patrol limits come from LevelData
     public float rightX = 5f;
-    public float flySpeed = 2.5f;
-
-    [Header("Attack")]
-    public float seeRange = 4.5f;   // how far it sees the cat
-    public float windUpTime = 0.5f; // red flash before dive
-    public float diveSpeed = 7f;
-    public float returnSpeed = 3f;
-    public float cooldown = 1.5f;
 
     [Header("Sprites")]
     public Sprite[] flyFrames;
@@ -50,10 +42,10 @@ public class Pigeon : MonoBehaviour
                 // cat is below me and close enough
                 float dx = Mathf.Abs(player.position.x - transform.position.x);
                 bool below = player.position.y < transform.position.y;
-                if (cooldownTimer <= 0 && below && dx < seeRange && Vector2.Distance(player.position, transform.position) < seeRange + 2f)
+                if (cooldownTimer <= 0 && below && dx < stats.seeRange && Vector2.Distance(player.position, transform.position) < stats.seeRange + 2f)
                 {
                     state = State.WindUp;
-                    timer = windUpTime;
+                    timer = stats.windUpTime;
                     alertIcon.SetActive(true);
                 }
                 break;
@@ -73,7 +65,7 @@ public class Pigeon : MonoBehaviour
                 break;
 
             case State.Dive:
-                transform.position = Vector3.MoveTowards(transform.position, diveTarget, diveSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, diveTarget, stats.diveSpeed * Time.deltaTime);
                 if (Vector3.Distance(transform.position, diveTarget) < 0.1f)
                 {
                     state = State.Return;
@@ -82,10 +74,10 @@ public class Pigeon : MonoBehaviour
 
             case State.Return:
                 Vector3 back = new Vector3(transform.position.x, patrolY, 0);
-                transform.position = Vector3.MoveTowards(transform.position, back, returnSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, back, stats.returnSpeed * Time.deltaTime);
                 if (Mathf.Abs(transform.position.y - patrolY) < 0.05f)
                 {
-                    cooldownTimer = cooldown;
+                    cooldownTimer = stats.cooldown;
                     state = State.Patrol;
                 }
                 break;
@@ -94,7 +86,7 @@ public class Pigeon : MonoBehaviour
 
     void Fly()
     {
-        transform.position += Vector3.right * dir * flySpeed * Time.deltaTime;
+        transform.position += Vector3.right * dir * stats.flySpeed * Time.deltaTime;
         if (transform.position.x > rightX) dir = -1;
         if (transform.position.x < leftX) dir = 1;
         sr.flipX = dir < 0;

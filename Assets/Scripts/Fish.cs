@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    public float bobSpeed = 3f;
-    public float bobHeight = 0.15f;
+    public ItemValues values;
     Vector3 startPos;
 
     void Start()
@@ -14,14 +13,14 @@ public class Fish : MonoBehaviour
     void Update()
     {
         // fish goes up and down a little
-        transform.position = startPos + Vector3.up * Mathf.Sin(Time.time * bobSpeed) * bobHeight;
+        transform.position = startPos + Vector3.up * Mathf.Sin(Time.time * values.fishBobSpeed) * values.fishBobHeight;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<PlayerController>() != null)
         {
-            FindFirstObjectByType<GameUI>().AddFish();
+            FindFirstObjectByType<GameUI>().AddFish(values.fishPoints);
             Destroy(gameObject);
         }
     }

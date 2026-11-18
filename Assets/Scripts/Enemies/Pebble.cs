@@ -3,10 +3,10 @@ using UnityEngine;
 public class Pebble : MonoBehaviour
 {
     public Vector2 velocity;
-    public float lifeTime = 3f;
 
-    void Start()
+    public void Throw(Vector2 vel, float lifeTime)
     {
+        velocity = vel;
         Destroy(gameObject, lifeTime);
     }
 
