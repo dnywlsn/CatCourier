@@ -6,20 +6,18 @@ public class PlayerHealth : MonoBehaviour
 {
     public static int tries = 1; // static so it stays after restart
 
-    public int maxHearts = 3;
     public int hearts;
-    public float fallY = -7f;
-    public float invincibleTime = 1f;
-    public Vector2 knockback = new Vector2(6f, 7f);
     public GameUI ui;
 
+    PlayerStats stats;
     Vector3 startPos;
     bool invincible = false;
     SpriteRenderer sr;
 
     void Start()
     {
-        hearts = maxHearts;
+        stats = GetComponent<PlayerController>().stats;
+        hearts = stats.maxHearts;
         startPos = transform.position;
         sr = GetComponent<SpriteRenderer>();
         ui.UpdateHearts(hearts);
@@ -29,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         // fell down between the roofs
-        if (transform.position.y < fallY)
+        if (transform.position.y < stats.fallY)
         {
             LoseHeart();
             Respawn();
@@ -54,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
         if (invincible) return;
         LoseHeart();
         float side = transform.position.x < fromPos.x ? -1 : 1;
-        GetComponent<PlayerController>().Knockback(new Vector2(knockback.x * side, knockback.y));
+        GetComponent<PlayerController>().Knockback(new Vector2(stats.knockback.x * side, stats.knockback.y));
         StartCoroutine(Blink());
     }
 
@@ -62,18 +60,20 @@ public class PlayerHealth : MonoBehaviour
     {
         hearts--;
         ui.UpdateHearts(hearts);
-        if (hearts <= 0)
-        {
-            tries++;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        if (hearts <= 0) GameOver();
+    }
+
+    public void GameOver()
+    {
+        tries++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator Blink()
     {
         invincible = true;
         float t = 0;
-        while (t < invincibleTime)
+        while (t < stats.invincibleTime)
         {
             sr.color = new Color(1, 1, 1, 0.3f);
             yield return new WaitForSeconds(0.1f);

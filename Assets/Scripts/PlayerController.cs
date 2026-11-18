@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 6f;
-    public float jumpForce = 13f;
+    public PlayerStats stats; // speed, jump etc. are in the data asset
 
     public MobileButton leftButton;
     public MobileButton rightButton;
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
         bool jumpNow = jumpButton.isPressed || Input.GetKey(KeyCode.Space);
         if (jumpNow && !jumpWasPressed && isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
             isGrounded = false;
         }
         jumpWasPressed = jumpNow;
@@ -54,13 +53,13 @@ public class PlayerController : MonoBehaviour
             knockTimer -= Time.fixedDeltaTime;
             return;
         }
-        rb.linearVelocity = new Vector2(moveInput * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput * stats.speed, rb.linearVelocity.y);
     }
 
     public void Knockback(Vector2 force)
     {
         rb.linearVelocity = force;
-        knockTimer = 0.25f;
+        knockTimer = stats.knockbackTime;
     }
 
     void OnCollisionStay2D(Collision2D collision)

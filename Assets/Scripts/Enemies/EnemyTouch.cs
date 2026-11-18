@@ -3,8 +3,6 @@ using UnityEngine;
 // when the cat touches an enemy: jump on top = enemy is gone, from the side = cat gets hurt
 public class EnemyTouch : MonoBehaviour
 {
-    public float bounceForce = 10f;
-
     void OnTriggerEnter2D(Collider2D other)
     {
         PlayerHealth hp = other.GetComponent<PlayerHealth>();
@@ -15,7 +13,8 @@ public class EnemyTouch : MonoBehaviour
 
         if (fromAbove)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
+            float bounce = other.GetComponent<PlayerController>().stats.stompBounce;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounce);
             Destroy(gameObject);
         }
         else
