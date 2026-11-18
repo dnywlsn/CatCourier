@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FinishDoor : MonoBehaviour
 {
-    public GameObject deliveredText;
+    public float waitBeforeNext = 2.5f;
     bool done = false;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -11,9 +12,27 @@ public class FinishDoor : MonoBehaviour
         if (!done && other.GetComponent<PlayerController>() != null)
         {
             done = true;
-            deliveredText.SetActive(true);
-            deliveredText.GetComponent<Text>().text = "DELIVERED!\nTRIES: " + PlayerHealth.tries;
-            Debug.Log("Level done in tries: " + PlayerHealth.tries);
+            GameUI ui = FindFirstObjectByType<GameUI>();
+            ui.ShowDelivered(PlayerHealth.tries);
+
+            // save right after the level
+            SaveSystem.CompleteLevel(SaveSystem.selectedLevel, ui.fish);
+            StartCoroutine(GoNext());
+        }
+    }
+
+    IEnumerator GoNext()
+    {
+        yield return new WaitForSecondsRealtime(waitBeforeNext);
+        PlayerHealth.tries = 1;
+        if (SaveSystem.selectedLevel < 2)
+        {
+            SaveSystem.selectedLevel++;
+            SceneManager.LoadScene("Game");
+        }
+        else
+        {
+            SceneManager.LoadScene("MainMenu"); // last level done
         }
     }
 }
