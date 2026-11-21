@@ -56,6 +56,7 @@ public class Dog : MonoBehaviour
                     state = State.WindUp;
                     timer = stats.windUpTime;
                     alertIcon.SetActive(true);
+                    AudioManager.Play(Sfx.DogWindUp); // growl before the bite
                 }
                 break;
 

@@ -41,6 +41,7 @@ public class Crow : MonoBehaviour
                     timer = stats.aimTime;
                     alertIcon.SetActive(true);
                     aimLine.enabled = true;
+                    AudioManager.Play(Sfx.CrowWindUp); // caw when it starts to aim
                 }
                 break;
 
@@ -67,6 +68,7 @@ public class Crow : MonoBehaviour
                 Vector2 direction = (player.position + Vector3.up * 0.5f - start).normalized;
                 GameObject p = Instantiate(pebblePrefab, start, Quaternion.identity);
                 p.GetComponent<Pebble>().Throw(direction * stats.pebbleSpeed, stats.pebbleLifeTime);
+                AudioManager.Play(Sfx.Throw);
                 timer = stats.cooldown;
                 state = State.Cooldown;
                 break;

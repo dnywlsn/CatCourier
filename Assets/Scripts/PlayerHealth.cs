@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         // fell down between the roofs
         if (transform.position.y < stats.fallY)
         {
+            AudioManager.Play(Sfx.Fall);
             LoseHeart();
             Respawn();
         }
@@ -50,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeHit(Vector3 fromPos)
     {
         if (invincible) return;
+        AudioManager.Play(Sfx.Hit);
         LoseHeart();
         float side = transform.position.x < fromPos.x ? -1 : 1;
         GetComponent<PlayerController>().Knockback(new Vector2(stats.knockback.x * side, stats.knockback.y));
@@ -65,6 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void GameOver()
     {
+        AudioManager.Play(Sfx.Lose); // the AudioManager stays, so the sound plays after reload too
         tries++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

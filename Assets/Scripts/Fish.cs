@@ -21,6 +21,7 @@ public class Fish : MonoBehaviour
         if (other.GetComponent<PlayerController>() != null)
         {
             FindFirstObjectByType<GameUI>().AddFish(values.fishPoints);
+            AudioManager.Play(Sfx.Pickup);
             Destroy(gameObject);
         }
     }

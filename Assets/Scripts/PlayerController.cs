@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
             isGrounded = false;
+            AudioManager.Play(Sfx.Jump);
         }
         jumpWasPressed = jumpNow;
 

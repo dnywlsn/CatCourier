@@ -47,6 +47,7 @@ public class Pigeon : MonoBehaviour
                     state = State.WindUp;
                     timer = stats.windUpTime;
                     alertIcon.SetActive(true);
+                    AudioManager.Play(Sfx.PigeonWindUp); // sound at the start of the wind-up
                 }
                 break;
 

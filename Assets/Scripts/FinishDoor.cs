@@ -14,6 +14,7 @@ public class FinishDoor : MonoBehaviour
             done = true;
             GameUI ui = FindFirstObjectByType<GameUI>();
             ui.ShowDelivered(PlayerHealth.tries);
+            AudioManager.Play(Sfx.Win);
 
             // save right after the level
             SaveSystem.CompleteLevel(SaveSystem.selectedLevel, ui.fish);

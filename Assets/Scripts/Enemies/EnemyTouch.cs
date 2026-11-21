@@ -15,6 +15,7 @@ public class EnemyTouch : MonoBehaviour
         {
             float bounce = other.GetComponent<PlayerController>().stats.stompBounce;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounce);
+            AudioManager.Play(Sfx.EnemyDefeat);
             Destroy(gameObject);
         }
         else
