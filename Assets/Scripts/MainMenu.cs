@@ -11,12 +11,12 @@ public class MainMenu : MonoBehaviour
     public Button[] levelButtons;   // 3 buttons
     public Text[] levelInfoTexts;   // "BEST: 5" or "LOCKED"
     public string[] levelNames = { "ROOFTOPS", "MARKET", "CONSTRUCTION" };
-    public Slider volumeSlider;
+    public Slider volumeSlider;  // music
+    public Slider sfxSlider;
 
     void Start()
     {
         SaveSystem.Get();
-        AudioListener.volume = SaveSystem.data.musicVolume;
         levelSelectPanel.SetActive(false);
         settingsPanel.SetActive(false);
         confirmPanel.SetActive(false);
@@ -53,14 +53,22 @@ public class MainMenu : MonoBehaviour
     public void OpenSettings()
     {
         volumeSlider.value = SaveSystem.data.musicVolume;
+        sfxSlider.value = SaveSystem.data.sfxVolume;
         settingsPanel.SetActive(true);
     }
 
     public void OnVolumeChanged(float value)
     {
         SaveSystem.data.musicVolume = value;
-        AudioListener.volume = value;
+        if (AudioManager.instance != null) AudioManager.instance.SetMusicVolume(value);
         SaveSystem.Save(); // save when settings change
+    }
+
+    public void OnSfxChanged(float value)
+    {
+        SaveSystem.data.sfxVolume = value;
+        if (AudioManager.instance != null) AudioManager.instance.SetSfxVolume(value);
+        SaveSystem.Save();
     }
 
     public void AskReset()

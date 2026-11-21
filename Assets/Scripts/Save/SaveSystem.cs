@@ -50,6 +50,7 @@ public static class SaveSystem
         if (data.bestFish == null) data.bestFish = d.bestFish;
         while (data.bestFish.Count < 3) data.bestFish.Add(0);
         if (data.musicVolume < 0 || data.musicVolume > 1) data.musicVolume = d.musicVolume;
+        if (data.sfxVolume < 0 || data.sfxVolume > 1) data.sfxVolume = d.sfxVolume;
     }
 
     public static void Save()
@@ -86,9 +87,11 @@ public static class SaveSystem
     // reset progress but keep the settings
     public static void ResetProgress()
     {
-        float volume = Get().musicVolume;
+        float music = Get().musicVolume;
+        float sfx = Get().sfxVolume;
         data = new SaveData();
-        data.musicVolume = volume;
+        data.musicVolume = music;
+        data.sfxVolume = sfx;
         Save();
     }
 }

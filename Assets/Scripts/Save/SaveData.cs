@@ -9,4 +9,5 @@ public class SaveData
     public List<int> bestFish = new List<int>() { 0, 0, 0 };  // best fish for each level
     public int totalDeliveries = 0;
     public float musicVolume = 0.8f;
+    public float sfxVolume = 0.8f;
 }

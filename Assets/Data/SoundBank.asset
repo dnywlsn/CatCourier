@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ee8ec29825e4060b0f62f08e077882, type: 3}
+  m_Name: SoundBank
+  m_EditorClassIdentifier: Assembly-CSharp::SoundBank
+  minPitch: 0.92
+  maxPitch: 1.08
+  sounds:
+  - type: 0
+    clips:
+    - {fileID: 8300000, guid: fa568765524064b4998e096a46fbeba2, type: 3}
+    volume: 0.5
+    randomPitch: 1
+  - type: 1
+    clips:
+    - {fileID: 8300000, guid: 0b85dd7cd18f542fb88aa16105d1fce8, type: 3}
+    - {fileID: 8300000, guid: 31e6956f619d44ebf811177ae8d37c6d, type: 3}
+    volume: 0.9
+    randomPitch: 1
+  - type: 2
+    clips:
+    - {fileID: 8300000, guid: 5c7a2c33642824e51965151fa1bb7ff9, type: 3}
+    - {fileID: 8300000, guid: 6214906c9faf24c1e988dfd274d97be7, type: 3}
+    volume: 0.6
+    randomPitch: 1
+  - type: 3
+    clips:
+    - {fileID: 8300000, guid: 3099502291c074d2e9b2ae6a361b4b06, type: 3}
+    volume: 0.9
+    randomPitch: 0
+  - type: 4
+    clips:
+    - {fileID: 8300000, guid: fc18ad39fd3c84d08abb3edd76e81785, type: 3}
+    volume: 1
+    randomPitch: 0
+  - type: 5
+    clips:
+    - {fileID: 8300000, guid: fd06f41efb7db4a6b9f75bfe14ed5655, type: 3}
+    volume: 0.8
+    randomPitch: 0
+  - type: 6
+    clips:
+    - {fileID: 8300000, guid: a9a98d40601a24d31a5fa7a649dc6546, type: 3}
+    volume: 0.5
+    randomPitch: 1
+  - type: 7
+    clips:
+    - {fileID: 8300000, guid: 462aefbf6fb2945cd8caa7c078f3bad5, type: 3}
+    volume: 0.7
+    randomPitch: 1
+  - type: 8
+    clips:
+    - {fileID: 8300000, guid: 23e50ec53c0b4401a8fe93da54e46d2f, type: 3}
+    volume: 0.7
+    randomPitch: 0
+  - type: 9
+    clips:
+    - {fileID: 8300000, guid: 7d27b414c9c7b468994f9e5cd2897a6f, type: 3}
+    volume: 0.8
+    randomPitch: 0
+  - type: 10
+    clips:
+    - {fileID: 8300000, guid: e8dcfe09e471d492dbce4c953f9be12d, type: 3}
+    volume: 0.8
+    randomPitch: 0
+  - type: 11
+    clips:
+    - {fileID: 8300000, guid: 2cf19c4745df84feab901c661ee5a25f, type: 3}
+    volume: 0.5
+    randomPitch: 1

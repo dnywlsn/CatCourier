@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = paused;
         pausePanel.SetActive(paused);
         Time.timeScale = paused ? 0f : 1f; // time stops
+        if (AudioManager.instance != null) AudioManager.instance.SetPaused(paused);
     }
 
     public void Pause()
